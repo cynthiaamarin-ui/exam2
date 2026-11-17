@@ -1,11 +1,12 @@
 const appointmentService = require("../services/appointmentService");
 const studentService = require("../services/studentService");
+const tutorService = require("../services/tutorService");
 
 // Display all appointments
 function getAppointments(req, res) {
     try {
         const appointments = appointmentService.getAllAppointments();
-        const tutors = require("../services/tutorService").getAllTutors();
+        const tutors = tutorService.getAllTutors();
 
         res.render("appointments", {
             appointments: appointments,
@@ -23,18 +24,22 @@ function bookAppointment(req, res) {
         const { studentEmail, tutor, subject, date, time } = req.body;
 
         if (!studentEmail || !tutor || !subject || !date || !time) {
-            return res.status(400).send("Please complete all appointment fields.");
+            return res.status(400).send(
+                "Please complete all appointment fields."
+            );
         }
 
         const student = studentService.getAllStudents().find(
-            student => student.email.toLowerCase() === studentEmail.trim().toLowerCase()
+            student =>
+                student.email.toLowerCase() ===
+                studentEmail.trim().toLowerCase()
         );
 
         if (!student) {
             return res.status(404).render("register-required");
         }
 
-        const appointment = appointmentService.bookAppointment(
+        const result = appointmentService.bookAppointment(
             student.email,
             tutor,
             subject,
@@ -42,9 +47,12 @@ function bookAppointment(req, res) {
             time
         );
 
-    if (!appointment) {
-    return res.status(400).render("appointment-error");
-}
+        if (!result.success) {
+            return res.status(400).render("appointment-error", {
+                message: result.message
+            });
+        }
+
         res.redirect("/appointments?success=true");
 
     } catch (error) {
@@ -63,6 +71,7 @@ function cancelAppointment(req, res) {
         }
 
         res.redirect("/appointments");
+
     } catch (error) {
         console.error("Appointment cancellation error:", error);
         res.status(500).send("Unable to cancel appointment.");

@@ -6,6 +6,7 @@
     <title>Appointments | UTRGV Tutoring Hub</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
 
     <%- include("partials/header") %>
@@ -13,7 +14,8 @@
     <main>
         <section class="hero">
             <h2>Book a Tutoring Session</h2>
-            <p>Schedule a session with a tutor and get the help you need.</p>
+            <p>Schedule a one-hour session with a tutor and get the help you need.</p>
+            <p>Appointments are available Monday through Friday, from 8 AM to 5 PM.</p>
         </section>
 
         <section class="features">
@@ -21,19 +23,24 @@
                 <h2>Schedule an Appointment</h2>
 
                 <label for="studentEmail">Student Email</label>
-                <input type="email" id="studentEmail" name="studentEmail"
-                    placeholder="Enter your registered email" required>
+                <input
+                    type="email"
+                    id="studentEmail"
+                    name="studentEmail"
+                    placeholder="Enter your registered email"
+                    required
+                >
 
                 <label for="tutor">Choose a Tutor</label>
-                <select name="tutor" required>
-    <option value="">Choose a tutor</option>
+                <select id="tutor" name="tutor" required>
+                    <option value="">Choose a tutor</option>
 
-    <% tutors.forEach(tutor => { %>
-        <option value="<%= tutor.name %>">
-            <%= tutor.name %>
-        </option>
-    <% }) %>
-</select>
+                    <% tutors.forEach(tutor => { %>
+                        <option value="<%= tutor.name %>">
+                            <%= tutor.name %>
+                        </option>
+                    <% }) %>
+                </select>
 
                 <label for="subject">Subject</label>
                 <select id="subject" name="subject" required>
@@ -44,10 +51,26 @@
                 </select>
 
                 <label for="date">Appointment Date</label>
-                <input type="date" id="date" name="date" required>
+                <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    required
+                >
 
                 <label for="time">Appointment Time</label>
-                <input type="time" id="time" name="time" required>
+                <select id="time" name="time" required>
+                    <option value="">Select a time</option>
+                    <option value="08:00">8:00 AM – 9:00 AM</option>
+                    <option value="09:00">9:00 AM – 10:00 AM</option>
+                    <option value="10:00">10:00 AM – 11:00 AM</option>
+                    <option value="11:00">11:00 AM – 12:00 PM</option>
+                    <option value="12:00">12:00 PM – 1:00 PM</option>
+                    <option value="13:00">1:00 PM – 2:00 PM</option>
+                    <option value="14:00">2:00 PM – 3:00 PM</option>
+                    <option value="15:00">3:00 PM – 4:00 PM</option>
+                    <option value="16:00">4:00 PM – 5:00 PM</option>
+                </select>
 
                 <button type="submit">Book Appointment</button>
             </form>
@@ -59,28 +82,53 @@
             <% if (appointments.length === 0) { %>
                 <p>No appointments have been scheduled yet.</p>
             <% } else { %>
+
                 <% appointments.forEach(appointment => { %>
                     <div class="feature-card">
                         <h3><%= appointment.tutor %></h3>
+
                         <p><strong>Student:</strong> <%= appointment.studentEmail %></p>
                         <p><strong>Subject:</strong> <%= appointment.subject %></p>
                         <p><strong>Date:</strong> <%= appointment.date %></p>
-                        <p><strong>Time:</strong> <%= appointment.time %></p>
+                      <p><strong>Time:</strong> <%= new Date("2000-01-01T" + appointment.time).toLocaleTimeString("en-US", 
+                        {hour: "numeric",minute: "2-digit",hour12: true}) %></p>
+                        <p><strong>Duration:</strong> 1 hour</p>
                         <p><strong>Status:</strong> <%= appointment.status %></p>
 
                         <% if (appointment.status === "Scheduled") { %>
                             <form action="/appointments/cancel" method="POST">
-                                <input type="hidden" name="id" value="<%= appointment.id %>">
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value="<%= appointment.id %>"
+                                >
                                 <button type="submit">Cancel Appointment</button>
                             </form>
                         <% } %>
                     </div>
                 <% }) %>
+
             <% } %>
         </section>
     </main>
 
     <%- include("partials/footer") %>
+
+    <script>
+        const dateInput = document.getElementById("date");
+
+        dateInput.addEventListener("change", function () {
+            if (!this.value) return;
+
+            const selectedDate = new Date(this.value + "T12:00:00");
+            const day = selectedDate.getDay();
+
+            if (day === 0 || day === 6) {
+                alert("Appointments are only available Monday through Friday.");
+                this.value = "";
+            }
+        });
+    </script>
 
 </body>
 </html>
