@@ -31,11 +31,11 @@ function bookAppointment(req, res) {
             student => student.email.toLowerCase() === studentEmail.trim().toLowerCase()
         );
 
-      if (!student) {
-    return res.status(404).render("register-required");
-}
+        if (!student) {
+            return res.status(404).render("register-required");
+        }
 
-        appointmentService.bookAppointment(
+        const appointment = appointmentService.bookAppointment(
             student.email,
             tutor,
             subject,
@@ -43,10 +43,14 @@ function bookAppointment(req, res) {
             time
         );
 
+    if (!appointment) {
+    return res.status(400).render("appointment-error");
+}
         res.redirect("/appointments?success=true");
+
     } catch (error) {
         console.error("Appointment booking error:", error);
-        res.status(500).send("Unable to book your appointment.");
+        res.status(500).send("Unable to book appointment.");
     }
 }
 

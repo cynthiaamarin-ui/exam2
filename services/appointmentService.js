@@ -1,4 +1,4 @@
-
+const tutorService = require("./tutorService");
 // Appointment service
 
 class Appointment {
@@ -18,13 +18,15 @@ const appointments = [];
 
 // Create a new appointment
 function bookAppointment(studentEmail, tutor, subject, date, time) {
-    const appointment = new Appointment(
-        studentEmail,
-        tutor,
-        subject,
-        date,
-        time
+    const selectedTutor = tutorService.getAllTutors().find(
+        item => item.name === tutor
     );
+
+    if (!selectedTutor || !selectedTutor.subjects.includes(subject)) {
+        return null;
+    }
+
+    const appointment = new Appointment(studentEmail, tutor, subject, date, time);
 
     appointments.push(appointment);
 

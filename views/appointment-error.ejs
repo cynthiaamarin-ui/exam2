@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Unavailable | UTRGV Tutoring Hub</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+    <%- include("partials/header") %>
+
+    <section class="error-page">
+        <div class="error-card">
+            <div class="error-icon">!</div>
+
+            <h2>Appointment Unavailable</h2>
+
+            <p>
+                This tutor does not teach the selected subject.
+                Please choose another tutor or subject and try again.
+            </p>
+
+            <a href="/appointments" class="error-button">
+                Back to Appointments
+            </a>
+        </div>
+    </section>
+
+    <%- include("partials/footer") %>
+
+</body>
+</html>
