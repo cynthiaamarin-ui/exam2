@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback | UTRGV Tutoring Hub</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <%- include("partials/header") %>
+
+    <main>
+        <section class="hero">
+            <h2>Share Your Feedback</h2>
+            <p>Tell us about your tutoring experience at UTRGV.</p>
+        </section>
+
+        <section class="features">
+            <form class="feature-card" action="/feedback" method="POST">
+
+                <h2>Submit Feedback</h2>
+
+                <label for="studentEmail">Student Email</label>
+                <input
+                    type="email"
+                    id="studentEmail"
+                    name="studentEmail"
+                    placeholder="Enter your registered email"
+                    required
+                >
+
+                <label for="tutor">Tutor</label>
+                <select id="tutor" name="tutor" required>
+                    <option value="">Choose a tutor</option>
+                    <option value="Alex Johnson">Alex Johnson</option>
+                    <option value="Maria Garcia">Maria Garcia</option>
+                    <option value="David Smith">David Smith</option>
+                </select>
+
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject" required>
+                    <option value="">Choose a subject</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Biology">Biology</option>
+                </select>
+
+                <label for="rating">Rating</label>
+                <select id="rating" name="rating" required>
+                    <option value="">Choose a rating</option>
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="3">3 - Good</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="1">1 - Poor</option>
+                </select>
+
+                <label for="comments">Comments</label>
+                <textarea
+                    id="comments"
+                    name="comments"
+                    placeholder="Share your experience..."
+                    rows="5"
+                    required
+                ></textarea>
+
+                <button type="submit">Submit Feedback</button>
+
+            </form>
+        </section>
+    </main>
+
+    <%- include("partials/footer") %>
+</body>
+</html>

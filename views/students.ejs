@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Students | UTRGV Tutoring Hub</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <%- include("partials/header") %>
+
+    <main>
+        <section class="hero">
+            <h2>Registered Students</h2>
+            <p>View students who have joined the UTRGV Tutoring Hub.</p>
+        </section>
+
+        <section class="features">
+            <% if (students.length === 0) { %>
+                <p>No students have registered yet.</p>
+            <% } else { %>
+                <% students.forEach(student => { %>
+                    <div class="feature-card">
+                        <h3><%= student.name %></h3>
+                        <p><strong>Email:</strong> <%= student.email %></p>
+                        <p><strong>Major:</strong> <%= student.major %></p>
+                        <p><strong>Subject:</strong> <%= student.subject %></p>
+                    </div>
+                <% }) %>
+            <% } %>
+        </section>
+    </main>
+
+    <%- include("partials/footer") %>
+
+</body>
+</html>

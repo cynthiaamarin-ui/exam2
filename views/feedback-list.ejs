@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Feedback | UTRGV Tutoring Hub</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include("partials/header") %>
+
+    <main>
+        <section class="hero">
+            <h2>Student Feedback</h2>
+            <p>See what students are saying about their tutoring experiences.</p>
+        </section>
+
+        <section class="features">
+            <h2>Submitted Feedback</h2>
+
+            <% if (feedback.length === 0) { %>
+                <p>No feedback has been submitted yet.</p>
+            <% } else { %>
+                <% feedback.forEach(item => { %>
+                    <div class="feature-card">
+                        <h3><%= item.tutor %></h3>
+                        <p><strong>Student:</strong> <%= item.studentEmail %></p>
+                        <p><strong>Subject:</strong> <%= item.subject %></p>
+                        <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
+                        <p><strong>Comments:</strong> <%= item.comments %></p>
+                        <p><strong>Date:</strong> <%= new Date(item.dateSubmitted).toLocaleDateString() %></p>
+                    </div>
+                <% }) %>
+            <% } %>
+        </section>
+    </main>
+
+    <%- include("partials/footer") %>
+</body>
+</html>

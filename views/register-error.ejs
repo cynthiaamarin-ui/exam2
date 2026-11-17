@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Already Exists | UTRGV Tutoring Hub</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <%- include("partials/header") %>
+
+    <main class="error-page">
+        <section class="error-card">
+            <div class="error-icon">!</div>
+
+            <h2>Account Already Exists</h2>
+
+            <p>
+                This email address is already registered with
+                UTRGV Tutoring Hub.
+            </p>
+
+            <p class="error-description">
+                Please use a different email address to create
+                a new student account.
+            </p>
+
+            <a href="/register" class="error-button">
+                Return to Registration
+            </a>
+        </section>
+    </main>
+
+    <%- include("partials/footer") %>
+
+</body>
+</html>

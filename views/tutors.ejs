@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Tutors | UTRGV Tutoring Hub</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <%- include("partials/header") %>
+
+    <main>
+
+        <section class="hero">
+            <h2>Find Your Tutor</h2>
+            <p>Explore tutoring support and find help with your courses at UTRGV.</p>
+        </section>
+
+        <!-- Meet Our Tutors -->
+        <section class="features">
+            <h2>Meet Our Tutors</h2>
+
+            <% if (tutors.length === 0) { %>
+                <p>No tutors are available right now.</p>
+            <% } else { %>
+                <% tutors.forEach(tutor => { %>
+                    <div class="feature-card">
+                        <h3><%= tutor.name %></h3>
+                        <p><strong>Email:</strong> <%= tutor.email %></p>
+                        <p><strong>Subjects:</strong> <%= tutor.subjects.join(", ") %></p>
+                        <p><strong>Availability:</strong> <%= tutor.availability %></p>
+                    </div>
+                <% }) %>
+            <% } %>
+        </section>
+
+        <!-- Available Subjects -->
+        <section class="features">
+            <h2>Available Subjects</h2>
+
+            <% if (subjects.length === 0) { %>
+                <p>No subjects are available right now.</p>
+            <% } else { %>
+                <% subjects.forEach(subject => { %>
+                    <div class="feature-card">
+                        <h3><%= subject.name %></h3>
+                        <p><%= subject.description %></p>
+                    </div>
+                <% }) %>
+            <% } %>
+        </section>
+
+    </main>
+
+    <%- include("partials/footer") %>
+</body>
+</html>

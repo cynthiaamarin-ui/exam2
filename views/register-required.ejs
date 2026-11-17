@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Required | UTRGV Tutoring Hub</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <%- include("partials/header") %>
+
+    <main class="error-page">
+        <section class="error-card">
+            <div class="error-icon">!</div>
+
+            <h2>Registration Required</h2>
+
+            <p>
+                You need to register as a student before booking
+                a tutoring appointment.
+            </p>
+
+            <p class="error-description">
+                Create your student profile to access our tutoring services
+                and schedule your first session.
+            </p>
+
+            <a href="/register" class="error-button">
+                Register Now
+            </a>
+
+            <p style="margin-top: 20px;">
+                Already registered?
+                <a href="/appointments">Return to Appointments</a>
+            </p>
+        </section>
+    </main>
+
+    <%- include("partials/footer") %>
+
+</body>
+</html>
