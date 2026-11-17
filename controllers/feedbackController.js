@@ -1,4 +1,3 @@
-
 const feedbackService = require("../services/feedbackService");
 const studentService = require("../services/studentService");
 
@@ -6,9 +5,15 @@ function submitFeedback(req, res) {
     try {
         const { studentEmail, tutor, subject, rating, comments } = req.body;
 
-        if (!studentEmail || !tutor || !subject || !rating || !comments) {
-            return res.status(400).send("Please complete all feedback fields.");
-        }
+     if (!studentEmail || !tutor || !subject || !rating || !comments) {
+    return res.status(400).send("Please complete all feedback fields.");
+}
+
+const numericRating = Number(rating);
+
+if (!Number.isInteger(numericRating) || numericRating < 1 || numericRating > 5) {
+    return res.status(400).send("Please select a rating between 1 and 5.");
+}
 
         const student = studentService.getAllStudents().find(
             student => student.email.toLowerCase() === studentEmail.trim().toLowerCase()
@@ -22,7 +27,7 @@ function submitFeedback(req, res) {
             student.email,
             tutor,
             subject,
-            Number(rating),
+            numericRating,
             comments
         );
 

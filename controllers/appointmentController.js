@@ -1,4 +1,3 @@
-
 const appointmentService = require("../services/appointmentService");
 const studentService = require("../services/studentService");
 

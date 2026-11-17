@@ -1,6 +1,4 @@
-
- // Tutor service
-
+// Tutor service
 class Tutor {
     constructor(name, email, subjects, availability) {
         this.id = Date.now().toString() + Math.random().toString(36).slice(2, 7);

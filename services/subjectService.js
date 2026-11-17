@@ -1,5 +1,4 @@
 // Subject service
-
 class Subject {
     constructor(name, description) {
         this.id = Date.now().toString() + Math.random().toString(36).slice(2, 7);

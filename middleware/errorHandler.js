@@ -1,4 +1,3 @@
-
 function errorHandler(err, req, res, next) {
     console.error("Application Error:", err.message);
 

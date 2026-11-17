@@ -50,11 +50,16 @@ app.get("/register", (req, res) => {
     });
 });
 app.get("/students", (req, res) => {
-    const students = require("./services/studentService").getAllStudents();
+    try {
+        const students = require("./services/studentService").getAllStudents();
 
-    res.render("students", {
-        students: students
-    });
+        res.render("students", {
+            students: students
+        });
+    } catch (error) {
+        console.error("Error loading students:", error);
+        res.status(500).send("Unable to load students.");
+    }
 });
 app.get("/feedback", (req, res) => {
     res.render("feedback", {

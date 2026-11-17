@@ -1,6 +1,4 @@
-
 // Student service
-
 class Student {
     constructor(name, email, major, subject) {
         this.id = Date.now().toString();

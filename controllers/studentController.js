@@ -1,4 +1,3 @@
-
 const studentService = require("../services/studentService");
 
 function registerStudent(req, res) {
